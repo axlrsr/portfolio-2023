@@ -2,7 +2,7 @@
 import "./style.css";
 
 // Animation
-import { animation } from "./animation.js";
+import { animation } from "./src/js/animation.js";
 animation();
 
 // Set credit year

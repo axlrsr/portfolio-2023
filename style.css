@@ -143,7 +143,7 @@ body {
   }
 
   .header__title {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
 
   .header__text {
@@ -337,8 +337,22 @@ body {
 }
 
 @media (max-width: 42rem) {
+  .footer {
+    align-items: flex-start;
+  }
+
   .footer__credit,
   .footer__list {
     font-size: 0.75rem;
+  }
+
+  .footer__credit > span {
+    display: block;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
   }
 }

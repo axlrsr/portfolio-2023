@@ -25,12 +25,26 @@ gsap.from(".nav", {
   },
 });
 
-gsap.from(".nav > *", {
+gsap.from(".nav__home", {
   y: "100% + 0.5rem",
-  rotate: "45deg",
+  rotate: "25deg",
   opacity: 0,
   duration: 0.8,
   delay: 0.4,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: ".nav",
+    start: "top 85%",
+    end: "bottom 15%",
+  },
+});
+
+gsap.from(".nav__item", {
+  y: "100% + 0.5rem",
+  rotate: "25deg",
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.6,
   stagger: 0.2,
   ease: "power4.out",
   scrollTrigger: {
@@ -48,7 +62,7 @@ headerTitleWordEls.forEach((wordEl) => {
 
 gsap.from(".header__title__word > span", {
   y: "1em",
-  rotate: "15deg",
+  rotate: "10deg",
   opacity: 0,
   duration: 0.8,
   stagger: 0.04,
@@ -143,12 +157,24 @@ gsap.from(".footer", {
   },
 });
 
-gsap.from(".footer > *", {
+gsap.from(".footer__credit", {
   y: "-100% - 0.5rem",
   rotate: "25deg",
   opacity: 0,
   duration: 0.8,
   delay: 0.4,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: ".footer",
+  },
+});
+
+gsap.from(".footer__item", {
+  y: "-100% - 0.5rem",
+  rotate: "25deg",
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.6,
   stagger: 0.2,
   ease: "power4.out",
   scrollTrigger: {

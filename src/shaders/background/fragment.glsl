@@ -3,6 +3,7 @@ precision highp float;
 uniform float uTime;
 uniform vec2 uResolution;
 uniform float uMaxWidth;
+uniform vec3 uColor;
 
 varying vec2 vUv;
 
@@ -13,8 +14,8 @@ void main() {
   float width = min(0.75, uMaxWidth / uResolution.x);
   float radius = width / 2.0;
 
-  vec3 blackColor = vec3(0.098,0.09,0.11);
-  vec3 whiteColor = vec3(0.439,0.125,0.875);
+  vec3 blackColor = vec3(0.102,0.102,0.102);
+  vec3 whiteColor = uColor;
 
   float strength = 1.0 - smoothstep(radius - 0.25, radius + 0.2, distance(uv, center));
 

@@ -2,12 +2,12 @@
 import "./style.css";
 
 // Animation
-import { animation } from "./src/js/animation.js";
-animation();
+import { setupAnimations } from "./src/js/animation.js";
+setupAnimations();
 
 // WebGL
-import { webgl } from "./src/js/webgl.js";
-webgl();
+import { setupWebgl } from "./src/js/webgl.js";
+setupWebgl();
 
 // Set credit year
 const footerYearEl = document.querySelector(".footer__year");

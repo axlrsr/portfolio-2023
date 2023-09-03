@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-export function animation() {
+export function setupAnimations() {
   // Nav animation
   gsap.from(".nav", {
     "--nav-after-scale": 0,

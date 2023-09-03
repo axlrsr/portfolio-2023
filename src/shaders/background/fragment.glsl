@@ -7,10 +7,10 @@ uniform float uMaxWidth;
 varying vec2 vUv;
 
 void main() {
-  vec2 aspect = vec2(1.0, uResolution.y / uResolution.x);
+  vec2 aspect = uResolution / max(uResolution.x, uResolution.y);
   vec2 uv = vUv * aspect;
   vec2 center = vec2(0.5) * aspect;
-  float width = min(1.0, uMaxWidth / uResolution.x);
+  float width = min(0.75, uMaxWidth / uResolution.x);
   float radius = width / 2.0;
 
   vec3 blackColor = vec3(0.098,0.09,0.11);

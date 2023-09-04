@@ -1,4 +1,4 @@
-import { Renderer, Geometry, Program, Mesh, Vec2, Color, Vec3 } from "ogl";
+import { Renderer, Geometry, Program, Mesh, Color, Vec3, Vec2 } from "ogl";
 
 import backgroundVertexShader from "../shaders/background/vertex.glsl?raw";
 import backgroundFragmentShader from "../shaders/background/fragment.glsl?raw";
@@ -25,6 +25,14 @@ export function setupWebgl() {
     sizes.height = window.innerHeight;
 
     renderer.setSize(sizes.width, sizes.height);
+  });
+
+  // Get mouse position
+  const mouse = new Vec2();
+
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = (e.clientX / sizes.width) * 2 - 1;
+    mouse.y = -(e.clientY / sizes.height) * 2 + 1;
   });
 
   // Update shader color on hover
@@ -73,6 +81,7 @@ export function setupWebgl() {
       uResolution: { value: [sizes.width, sizes.height] },
       uMaxWidth: { value: 800 },
       uColor: { value: currentColor },
+      uMouse: { value: mouse },
     },
   });
 
@@ -88,6 +97,7 @@ export function setupWebgl() {
     program.uniforms.uTime.value = t * 0.001;
     program.uniforms.uResolution.value = [sizes.width, sizes.height];
     program.uniforms.uColor.value = currentColor.lerp(targetColor, 0.05);
+    program.uniforms.uMouse.value = mouse;
 
     renderer.render({ scene: mesh });
   }

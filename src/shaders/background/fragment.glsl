@@ -4,6 +4,7 @@ uniform float uTime;
 uniform vec2 uResolution;
 uniform float uMaxWidth;
 uniform vec3 uColor;
+uniform vec2 uMouse;
 
 varying vec2 vUv;
 
@@ -56,7 +57,7 @@ float cnoise(vec2 P)
 void main() {
   vec2 aspect = uResolution / max(uResolution.x, uResolution.y);
   vec2 uv = vUv * aspect;
-  vec2 center = vec2(0.5) * aspect;
+  vec2 center = (vec2(0.5) * aspect) + uMouse * 0.05;
   float width = min(0.75, uMaxWidth / uResolution.x);
   float flicker = cnoise(vec2(uTime * 2.0)) * 0.025;
   float radius = width / 2.0;

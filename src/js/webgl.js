@@ -28,11 +28,12 @@ export function setupWebgl() {
   });
 
   // Get mouse position
-  const mouse = new Vec2();
+  const currentMouse = new Vec2();
+  const targetMouse = new Vec2();
 
   window.addEventListener("mousemove", (e) => {
-    mouse.x = (e.clientX / sizes.width) * 2 - 1;
-    mouse.y = -(e.clientY / sizes.height) * 2 + 1;
+    targetMouse.x = (e.clientX / sizes.width) * 2 - 1;
+    targetMouse.y = -(e.clientY / sizes.height) * 2 + 1;
   });
 
   // Update shader color on hover
@@ -81,7 +82,7 @@ export function setupWebgl() {
       uResolution: { value: [sizes.width, sizes.height] },
       uMaxWidth: { value: 800 },
       uColor: { value: currentColor },
-      uMouse: { value: mouse },
+      uMouse: { value: currentMouse },
     },
   });
 
@@ -97,7 +98,7 @@ export function setupWebgl() {
     program.uniforms.uTime.value = t * 0.001;
     program.uniforms.uResolution.value = [sizes.width, sizes.height];
     program.uniforms.uColor.value = currentColor.lerp(targetColor, 0.05);
-    program.uniforms.uMouse.value = mouse;
+    program.uniforms.uMouse.value = currentMouse.lerp(targetMouse, 0.05);
 
     renderer.render({ scene: mesh });
   }

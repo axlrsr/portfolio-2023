@@ -11,18 +11,15 @@ varying vec2 vUv;
 //	Classic Perlin 2D Noise 
 //	by Stefan Gustavson
 //
-vec2 fade(vec2 t)
-{
+vec2 fade(vec2 t) {
   return t*t*t*(t*(t*6.0-15.0)+10.0);
 }
 
-vec4 permute(vec4 x)
-{
+vec4 permute(vec4 x) {
   return mod(((x*34.0)+1.0)*x, 289.0);
 }
 
-float cnoise(vec2 P)
-{
+float cnoise(vec2 P) {
   vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
   vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
   Pi = mod(Pi, 289.0); // To avoid truncation effects in permutation
@@ -54,20 +51,27 @@ float cnoise(vec2 P)
   return 2.3 * n_xy;
 }
 
+float random(vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 void main() {
+  // Variables
   vec2 aspect = uResolution / max(uResolution.x, uResolution.y);
   vec2 uv = vUv * aspect;
   vec2 center = (vec2(0.5) * aspect) + uMouse * 0.05;
-  float width = min(0.75, uMaxWidth / uResolution.x);
+  float size = min(0.75, uMaxWidth / uResolution.x);
   float flicker = cnoise(vec2(uTime * 2.0)) * 0.025;
-  float radius = width / 2.0;
+  float radius = size / 2.0;
 
+  // Colors
   vec3 blackColor = vec3(0.102,0.102,0.102);
   vec3 whiteColor = uColor;
 
+  // Pattern
   float strength = 1.0 - smoothstep(radius - 0.25 - flicker, radius + 0.2, distance(uv, center));
-
   vec3 mixedColor = mix(blackColor, whiteColor, strength);
+  vec3 noiseColor = mix(mixedColor, vec3(random(uv * uTime)), 0.05);
 
-  gl_FragColor = vec4(mixedColor, 1.0);
+  gl_FragColor = vec4(noiseColor, 1.0);
 }
